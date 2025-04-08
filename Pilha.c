@@ -3,7 +3,7 @@
 
 //EXEMPLO DA NET SO PRA ANALISE E ESTUDO
 
-struct Node {
+typedef struct Node {
     int num;
     struct Node *prox;
 };
