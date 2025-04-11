@@ -43,8 +43,9 @@ class PilhaD {
             cout << "A pilha está vazia." << endl;
             return -1;
         }
-        int valor = topo->info; //guardando info do topo
-        Nodo *temp = this->topo;
+
+        Nodo *temp = topo;
+        int valor = temp->info; //guardando info do topo
         topo = topo->prox;
  
         if(temp == nullptr) {
@@ -65,14 +66,17 @@ class PilhaD {
         
         Nodo *temp = topo;
 
-        cout << temp->info << endl;
-        while(temp->prox != nullptr) {
-            temp = temp->prox;
+        while(temp != nullptr) {
             cout << temp->info << endl;
+            temp = temp->prox;
         }
 
         delete temp;
 
+    }
+
+    void esvaziarPilha() {
+        
     }
 
 };
@@ -82,6 +86,7 @@ int main() {
     PilhaD pilha;
     pilha.empilhar(2);
     pilha.empilhar(3);
+    pilha.desempilhar();
     pilha.listar();
  
     /*(*novo).info = 3   ==    novo->info=3 */
