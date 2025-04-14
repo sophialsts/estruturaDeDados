@@ -88,6 +88,8 @@ int main() {
     pilha.empilhar(3);
     pilha.desempilhar();
     pilha.listar();
+    pilha.desempilhar();
+    pilha.listar();
  
     /*(*novo).info = 3   ==    novo->info=3 */
 }
