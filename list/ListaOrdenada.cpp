@@ -68,8 +68,10 @@ class ListaOrdenada {
                 if(anterior != nullptr) {
                     anterior->prox = atual->prox;
                 }
+                else {
+                    inicio = atual->prox;
+                }
                 delete atual;
-                inicio = nullptr;
                 cout << "Item deletado" << endl;
                 break;
             }
@@ -98,12 +100,8 @@ class ListaOrdenada {
 int main() {
 
     ListaOrdenada minhaLista;
-    minhaLista.inserir(2);
-    minhaLista.inserir(1);
-    minhaLista.inserir(5);
     minhaLista.inserir(3);
-    minhaLista.inserir(9);
-    minhaLista.inserir(4);
+    minhaLista.deletar(3);
     minhaLista.listar();
 
 }
