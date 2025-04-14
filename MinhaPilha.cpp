@@ -65,10 +65,9 @@ class PilhaD {
         
         Nodo *temp = topo;
 
-        cout << temp->info << endl;
-        while(temp->prox != nullptr) {
-            temp = temp->prox;
+        while(temp != nullptr) {
             cout << temp->info << endl;
+            temp = temp->prox;
         }
 
         delete temp;
@@ -82,6 +81,8 @@ int main() {
     PilhaD pilha;
     pilha.empilhar(2);
     pilha.empilhar(3);
+    pilha.listar();
+    pilha.desempilhar();
     pilha.listar();
  
     /*(*novo).info = 3   ==    novo->info=3 */
