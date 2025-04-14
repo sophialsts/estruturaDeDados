@@ -89,7 +89,7 @@ int main() {
     minhaFilinha.inserir(9);
     minhaFilinha.inserir(8);
     minhaFilinha.listar();
-    cout << "Essa foi a primeira lista." << endl;
+    cout << "Essa foi a primeira fila." << endl;
     minhaFilinha.retirar();
     minhaFilinha.listar();
     cout << "Essa é a fila tirando um elemento" << endl;
