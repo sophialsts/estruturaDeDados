@@ -7,13 +7,16 @@ struct nodo {
 };
 
 class ListaOrdenada {
+
     private:
     nodo *inicio;
+    bool estaInvertido;
 
     public:
 
     ListaOrdenada() {
         inicio = nullptr;
+        estaInvertido = false;
     }
 
     void inserir(int n) {
@@ -26,7 +29,7 @@ class ListaOrdenada {
 
         novo->info = n;
         if(inicio == nullptr) {
-            inicio = novo;
+            inicio = novo; //move novo para inicio
             inicio->prox = nullptr;
         }
         else {
@@ -40,21 +43,20 @@ class ListaOrdenada {
                 anterior->prox = novo;
                 novo->prox = nullptr;
             }
-            else { //
-                if(atual == inicio) { //elemento é o primeiro
-                    novo->prox = inicio;
-                    inicio = novo;
-                }
-                else {
-                    //atual->info >= novo->info
-                    anterior->prox = novo;
-                    novo->prox = atual;
-                }
+            else if(atual == inicio){ //elemento é o primeiro
+                novo->prox = inicio;
+                inicio = novo;
+            }
+            else {
+                anterior->prox = novo;
+                novo->prox = atual;
             }
         }
     }
+    
 
-    void deletar(int n) {
+    void deletar (int n) {
+
         if(inicio == nullptr) {
             cout << "Não há itens para deletar" << endl;
             return;
@@ -69,7 +71,7 @@ class ListaOrdenada {
                     anterior->prox = atual->prox;
                 }
                 else {
-                    inicio = atual->prox;
+                    inicio = atual->prox; //número identificado é o primeiro
                 }
                 delete atual;
                 cout << "Item deletado" << endl;
@@ -86,22 +88,57 @@ class ListaOrdenada {
             return;
         }
 
+        cout << "Lista ";
+        if(estaInvertido) cout << "invertida";
+        cout << endl;
+
         nodo *atual = inicio;
         int i = 1;
-
+        
         while(atual != nullptr) {
             cout << i << "° elemento = " << atual->info << endl;
             i++;
             atual = atual->prox;
         }
+
     }
+
+    void inverter () {
+
+        if(inicio == nullptr || inicio->prox == nullptr){
+            cout << "Não é possível inverter a lista" << endl;
+            return;
+        }
+
+        nodo *ant = nullptr, *atual = inicio, *prox = nullptr;
+        
+        while(atual != nullptr) {
+            prox = atual->prox;
+            atual->prox = ant;
+            ant = atual; //endereço de ant é o mesmo que atual
+            atual = prox; //endereço de atual é o mesmo que prox(o antigo próximo)
+        }
+
+        inicio = ant;
+        estaInvertido = !estaInvertido;
+
+    }
+
 };
 
 int main() {
 
     ListaOrdenada minhaLista;
     minhaLista.inserir(3);
-    minhaLista.deletar(3);
+    minhaLista.inserir(5);
+    minhaLista.inserir(4);
+    minhaLista.inserir(2);
+    minhaLista.deletar(2);
     minhaLista.listar();
+    /*
+    minhaLista.inverter();
+    minhaLista.listar();
+    minhaLista.deletar(4);
+    minhaLista.listar();*/
 
 }
