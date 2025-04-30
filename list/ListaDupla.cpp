@@ -5,7 +5,7 @@ struct nodo2 {
     int info;
     struct nodo2 *ant, *prox;
 };
-// fazer a lista normal, e fazer 2 sublistas de pares e ímpares baseado nessa lista principal
+
 class ListaDupla {
     private:
     nodo2 *inicio;
