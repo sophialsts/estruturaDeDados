@@ -5,7 +5,7 @@ using namespace std;
 
 struct nodo2 {
     int info;
-    struct nodo2 *ant, *prox, *proxIgual;
+    struct nodo2 *ant, *prox;
 };
 
 class ListaDupla {
@@ -21,22 +21,26 @@ class ListaDupla {
 
     void inserir(int n) {
         nodo2 *novo, *atual;
+        bool isEven;
         novo = new nodo2();
 
         if(novo == nullptr) return;
 
         novo->info = n;
 
+        if(novo->info % 2) isEven = false;
+        else isEven = true;
+
         if(inicio == nullptr) { //vai ser o primeiro elemento
             novo->ant = nullptr;
             novo->prox = nullptr;
             inicio = novo;
-            if(novo->info % 2) {
-                impares->proxIgual = nullptr;
+            if(isEven) {
+                impares->prox = nullptr;
                 impares = novo;
             }
             else {
-                pares->proxIgual = nullptr;
+                pares->prox = nullptr;
                 pares = novo;
             }
             return;
@@ -46,26 +50,26 @@ class ListaDupla {
 
         while((atual->prox != nullptr) && (novo->info > atual->info)) atual = atual->prox;
 
-            if((atual->prox == nullptr) && (novo->info > atual->info)) { //fim
+            if((atual->prox == nullptr) && (novo->info > atual->info)) { //adicionar o novo no fim
                 atual->prox = novo;
                 novo->ant = atual;
                 novo->prox = nullptr;
-                if(novo->info % 2) {
-                    impares->proxIgual = novo;
-                    impares->proxIgual->proxIgual = nullptr;
+                if(isEven) {
+                    impares->prox = novo;
+                    impares->prox->prox = nullptr;
                 }
                 else {
-                    pares->proxIgual = novo;
-                    pares->proxIgual->proxIgual = nullptr;
+                    pares->prox = novo;
+                    pares->prox->prox = nullptr;
                 }
                 return;
             }
-            else if(atual == inicio) { //inicio
+            else if(atual == inicio) { //adicionar o novo no inicio (1ª posição)
                 novo->prox = inicio;
                 inicio->ant = novo;
                 novo->ant = nullptr;
                 inicio = novo;
-                if(novo->info % 2) {
+                if(isEven) {
                     novo->prox = impares;
                     impares = novo;
                 }
@@ -80,17 +84,14 @@ class ListaDupla {
                 atual->ant->prox = novo;
                 novo->prox = atual;
                 atual->ant = novo;
-                if(novo->info % 2) {
-                    novo->prox = impares;
-                    impares = novo;
+                if(isEven) {
+                    
                 }
                 else {
-                    novo->prox = pares;
-                    pares = novo;
+
                 }
             }
-
-    }
+        }
 
 };
 

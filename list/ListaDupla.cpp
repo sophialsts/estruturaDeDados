@@ -54,4 +54,64 @@ class ListaDupla {
 
     }
 
+    void retirar(int n) {
+        nodo2 *atual;
+
+        if(inicio == nullptr) return;
+
+        atual = inicio;
+
+        while((atual != nullptr) && (n != atual->info)) atual = atual->prox;
+
+            if(atual == nullptr) {
+                cout << "Número não está na lista para se retirar";
+            }
+            else {
+                if((inicio == atual) && atual->prox == nullptr) { //o elemento é o único da lista
+                    atual = nullptr; 
+                    return;
+                }
+                else if(inicio == atual) { //o elemento é o primeiro da lista(tem outros depois)
+                    inicio = inicio->prox;
+                    inicio->ant = nullptr; //ou atual = nullptr;
+                }
+                else {
+                    if(atual->prox == nullptr) atual->ant->prox = nullptr; //elemento encontrado é o último da lista
+                    else {
+                        atual->ant->prox = atual->prox;
+                        atual->prox->ant = atual->ant;
+                    }
+                }
+                delete atual;
+            }
+    }
+
+    void listar() {
+        nodo2 *atual;
+        int i = 1;
+
+        atual = inicio;
+        cout << "Lista:" <<endl;
+        while(atual != nullptr) {
+            cout << "Elemento " << i << "º: " << atual->info << endl;
+            atual = atual->prox;
+            i++;
+        }
+
+        cout << "Fim da lista." << endl;
+    }
+
 };
+
+int main() {
+
+    ListaDupla myList;
+    myList.inserir(2);
+    myList.inserir(5);
+    myList.inserir(1);
+    myList.inserir(3);
+    myList.listar();
+    myList.retirar(3); //falha de segmentação
+    myList.listar();
+
+}
