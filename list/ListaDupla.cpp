@@ -111,7 +111,7 @@ int main() {
     myList.inserir(1);
     myList.inserir(3);
     myList.listar();
-    myList.retirar(3); //falha de segmentação
+    myList.retirar(5); //falha de segmentação
     myList.listar();
 
 }
