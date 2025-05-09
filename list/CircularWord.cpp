@@ -27,10 +27,11 @@ class CircularWord {
         novo->word = palavra;
  
         if(inicio == nullptr) {
+                novo->prox = novo;
+                novo->ant = novo;
                 inicio = novo;
-                inicio->prox = nullptr;
+                atual = novo;
                 fim = novo;
-                fim->prox = nullptr;
                 return;
             }
         else if(inicio->prox == nullptr) { //só tem um elemento
@@ -99,9 +100,20 @@ class CircularWord {
 
         novo->word = newWord;
 
-        novo->prox = atual->prox;
-        novo->ant = atual;
-        atual->prox = novo;
+        if(atual == nullptr){
+            atual = novo;
+            novo->prox = novo;
+            novo->ant = novo;
+            inicio = novo;
+            atual = novo;
+            fim = novo;
+            return;
+        }
+        else {
+            novo->prox = atual->prox;
+            novo->ant = atual;
+            atual->prox = novo;
+        }
 
     }
 
@@ -121,10 +133,11 @@ class CircularWord {
 
         nodo *aux = atual;
 
-        if (atual->prox == atual && atual->ant == atual) {
+        if (atual->prox == atual) {
             inicio = nullptr;
             fim = nullptr;
             atual = nullptr;
+            return;
         } 
         else {
 
@@ -149,17 +162,18 @@ class CircularWord {
         char op = ' ';
 
         while(op != 'x'){
-            cout << "Palavra atual: " << atual->word << endl;
-
-            nodo *aux = inicio;
-            cout << "Frase: ";
-
-            do{
-                cout << aux->word << " ";
-                aux = aux->prox;
+            if(inicio != nullptr) {
+                cout << "Palavra atual: " << atual->word << endl;
+                if(inicio->prox != inicio) {  // Verifica se há mais de um elemento
+                    nodo *aux = inicio;
+                    cout << "Frase: ";
+                    do {
+                        cout << aux->word << " ";
+                        aux = aux->prox;
+                    } while(aux != inicio);
+                    cout << endl;
+                }
             }
-            while(aux != inicio);
-            cout << endl;
 
             cout << "Digite sua opção: ";
             cout << "e - editar, d - inserir, s - eliminar, < - anterior, > - posterior, l - listar, x - sair" << endl;
