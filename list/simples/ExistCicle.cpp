@@ -13,35 +13,52 @@ class ExistCicle {
 
     public:
     ExistCicle() {
-        inicio = nullptr;
+        inicio = new nodo();
+    }
+
+    void testeListaCircular() {
+        inicio->prox = new nodo();
+        inicio->prox->prox = new nodo();
+        inicio->prox->prox->prox = inicio->prox;
+        
+        if(existCicle()) {
+            cout << "Encontrou ciclo!" << endl;
+        } else {
+            cout << "Não há ciclo." << endl;
+        }
     }
 
     bool existCicle() {
         nodo *usados, *atual;
 
         if(inicio != nullptr) {
-            atual = inicio;
-            usados = inicio->prox;
+            usados = inicio;
+            atual = inicio->prox;
         }
 
-        while(usados->prox != nullptr) {
-            do{
+        while(atual != nullptr) {
+
+            if(atual->prox == usados) {
+                return true;
+            }
+
+            while(usados != atual) {
                 if(atual->prox == usados) {
                     return true;
                 }
-                atual = atual->prox;
-            } while(atual->prox != usados);
-            usados = usados->prox;
-            atual = inicio;
+                usados = usados->prox;
+            }
+
+            usados = inicio;
+            atual = atual->prox;
+
         }
 
-        if(usados->prox == nullptr) {
-            return false;
-        }
+        if(atual == nullptr) return false;
 
     }
 
-    void ciclo(nodo *inicio) {
+    /*void ciclo(nodo *inicio) {
         nodo *aux, *atual, *ciclo;
         ciclo = nullptr;
         atual = inicio;
@@ -67,5 +84,12 @@ class ExistCicle {
             if(atual == nullptr) cout << "?";
         }
 
-    }
+    }*/
 };
+
+int main() {
+
+    ExistCicle ex1;
+    ex1.testeListaCircular();
+
+}

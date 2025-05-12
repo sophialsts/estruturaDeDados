@@ -30,7 +30,7 @@ class SumLists{
         inicio3 = nullptr;
     }
 
-    void inserirLista1(int number) {
+    int inserirLista1(int number) {
         nodo *novo = new nodo();
 
         novo->num = number;
@@ -86,19 +86,15 @@ class SumLists{
         aux2 = inicio2;
         inicio3 = atualResult;
 
-        while(aux1->prox != nullptr && aux2->prox != nullptr){
-            nodo *novo = new nodo();
-            if(aux1->num + aux2->num >= 10) 
-            atualResult->num = aux1->num + aux2->num;
+        while(aux1->prox != nullptr){
             aux1 = aux1->prox;
-            aux2 = aux2->prox;
-            atualResult->prox = novo;
-            atualResult = atualResult->prox;
         }
 
-        if(aux1->prox == nullptr && aux2->prox == nullptr) {
-            return;
+        while(aux2->prox != nullptr) {
+            aux2 = aux2->prox;
         }
+
+        
 
 
     }
