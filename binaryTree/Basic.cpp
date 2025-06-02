@@ -12,21 +12,6 @@ class Basic {
 
     Basic() { raiz = nullptr; }
 
-    /*void inserir(nodo *raiz, int n) {
-        nodo *atual, *pai;
-
-        if(raiz == nullptr){
-            raiz = new nodo();
-            if(raiz == nullptr) exit(1);
-            raiz->info = n;
-            raiz->esq = nullptr;
-            raiz->dir = nullptr;
-            return;
-        }
-    
-    
-    }*/
-
     nodo* inserir(nodo *raiz, int n) { //método com recursão
 
         if(raiz == nullptr){
@@ -51,11 +36,11 @@ class Basic {
     void emOrdem(nodo *raiz) {
         if(raiz == nullptr) return;
         emOrdem(raiz->esq);
-        cout << raiz->info;
+        cout << raiz->info << " ";
         emOrdem(raiz->dir);
     }
 
-    int Buscar(nodo *raiz, int n) {
+    int buscar(nodo *raiz, int n) {
         if(raiz == nullptr) {
             return -1;
         }
@@ -64,18 +49,18 @@ class Basic {
         }
 
         if(raiz->info > n) {
-            return Buscar(raiz->esq, n);
+            return buscar(raiz->esq, n);
         }
         else {
-            return Buscar(raiz->dir, n);
+            return buscar(raiz->dir, n);
         }
     }
 
     int contarF(nodo *raiz) {
-        if(raiz == nullptr) return 0;
-        if(raiz->esq == nullptr && !raiz->dir)  return 1;
+            if(raiz == nullptr) return 0;
+            if(raiz->esq == nullptr && !raiz->dir)  return 1;
 
-        return(contarF(raiz->esq) + contarF(raiz->dir));
+            return(contarF(raiz->esq) + contarF(raiz->dir));
         }
 
     void compararLados(nodo *raiz) {
@@ -97,7 +82,7 @@ class Basic {
         
     }
 
-    int contar(nodo *raiz) { //passar cont como 0
+    int contar(nodo *raiz) { 
 
         if(raiz == nullptr) {
             return 0;
@@ -113,14 +98,27 @@ class Basic {
 int main() {
 
     Basic arvore;
-    int cont = 3;
-    nodo *novo = arvore.inserir(arvore.raiz, 5);;
+   
+    arvore.raiz = arvore.inserir(arvore.raiz, 10);
+    arvore.raiz = arvore.inserir(arvore.raiz, 5);
+    arvore.raiz = arvore.inserir(arvore.raiz, 15);
+    arvore.raiz = arvore.inserir(arvore.raiz, 3);
+    arvore.raiz = arvore.inserir(arvore.raiz, 1);
+    arvore.raiz = arvore.inserir(arvore.raiz, 7);
+    arvore.raiz = arvore.inserir(arvore.raiz, 20);
+    arvore.raiz = arvore.inserir(arvore.raiz, 12);
 
-    novo = arvore.inserir(novo, 3);
-    arvore.inserir(arvore.raiz, 1);
-    arvore.inserir(arvore.raiz, 8);
     cout << arvore.contar(arvore.raiz);
-    //arvore.emOrdem(arvore.raiz);  
-
+    cout << endl;
+    cout << arvore.maiorFolha(arvore.raiz);
+    cout << endl;
+    arvore.compararLados(arvore.raiz);
+    cout << endl;
+    arvore.emOrdem(arvore.raiz);
+    cout << endl;
+    cout << arvore.contarF(arvore.raiz);
+    cout << endl;
+    cout << arvore.buscar(arvore.raiz, 12);
+    cout << endl;
 
 }
