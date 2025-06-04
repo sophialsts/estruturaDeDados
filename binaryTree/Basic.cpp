@@ -92,6 +92,40 @@ class Basic {
 
     }
 
+    bool eEstritaBinario(nodo *raiz) {
+
+        if(raiz == nullptr) {
+            return true;
+        }
+
+        if(raiz->esq == nullptr && raiz->dir == nullptr) {
+                return true;
+            } 
+        if(raiz->esq != nullptr && raiz->dir != nullptr) {
+            return eEstritaBinario(raiz->esq) && eEstritaBinario(raiz->dir);
+            //antes eu só estava chamando a função e esquecendo de retornar
+        }
+    
+        return false;
+    
+    }
+
+    nodo* retirar(nodo *raiz, int n) {
+        nodo *aux;
+
+        if(raiz == nullptr) return raiz;
+        if(n > raiz->info) {
+            raiz->dir = retirar(raiz->dir, n);
+        }
+        else {
+            if(n < raiz->info) {
+                raiz->esq = retirar(raiz->esq, n);
+            }
+            else { //igual
+
+            }
+        }
+    }
 
 };
 
@@ -104,11 +138,12 @@ int main() {
     arvore.raiz = arvore.inserir(arvore.raiz, 15);
     arvore.raiz = arvore.inserir(arvore.raiz, 3);
     arvore.raiz = arvore.inserir(arvore.raiz, 1);
+    arvore.raiz = arvore.inserir(arvore.raiz, 4);
     arvore.raiz = arvore.inserir(arvore.raiz, 7);
     arvore.raiz = arvore.inserir(arvore.raiz, 20);
     arvore.raiz = arvore.inserir(arvore.raiz, 12);
 
-    cout << arvore.contar(arvore.raiz);
+    /*cout << arvore.contar(arvore.raiz);
     cout << endl;
     cout << arvore.maiorFolha(arvore.raiz);
     cout << endl;
@@ -119,6 +154,7 @@ int main() {
     cout << arvore.contarF(arvore.raiz);
     cout << endl;
     cout << arvore.buscar(arvore.raiz, 12);
-    cout << endl;
+    cout << endl;*/
+    cout << arvore.eEstritaBinario(arvore.raiz);
 
 }
