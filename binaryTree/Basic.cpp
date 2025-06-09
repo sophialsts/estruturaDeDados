@@ -127,6 +127,33 @@ class Basic {
         }
     }
 
+    int altura(nodo *raiz){
+        if(raiz==nullptr) return -1;
+
+        int e = altura(raiz->esq);
+        int d = altura(raiz->dir);
+
+        if(e>d) return e+1;
+        else return d+1;
+    }
+
+    void imprimeNiveis(nodo *raiz) { //largura
+        nodo *esq, *dir;
+
+        if(raiz != nullptr) cout << raiz->info;
+
+        if(raiz->esq != nullptr) {
+            esq = raiz->esq;
+        }
+        else if(raiz->dir != nullptr) {
+            dir = raiz->dir;
+        }
+
+        if(esq) imprimeNiveis(raiz->esq);
+        else if(dir) imprimeNiveis(raiz->dir);
+
+    }
+
 };
 
 int main() {
@@ -154,7 +181,8 @@ int main() {
     cout << arvore.contarF(arvore.raiz);
     cout << endl;
     cout << arvore.buscar(arvore.raiz, 12);
-    cout << endl;*/
-    cout << arvore.eEstritaBinario(arvore.raiz);
+    cout << endl;
+    cout << arvore.eEstritaBinario(arvore.raiz);*/
+    cout << arvore.altura(arvore.raiz);
 
 }
