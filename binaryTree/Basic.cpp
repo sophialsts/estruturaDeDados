@@ -182,7 +182,7 @@ int main() {
     cout << endl;
     cout << arvore.buscar(arvore.raiz, 12);
     cout << endl;
-    cout << arvore.eEstritaBinario(arvore.raiz);*/
-    cout << arvore.altura(arvore.raiz);
+    cout << arvore.eEstritaBinario(arvore.raiz);
+    cout << arvore.altura(arvore.raiz);*/
 
 }
