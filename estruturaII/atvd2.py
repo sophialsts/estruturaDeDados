@@ -1,6 +1,6 @@
 import time
 import pandas as pd
-from algoritmos import quickSort
+from algoritmos import quickSort, shellSort
 
 data = pd.read_csv('ai_assistant_usage_student_life.csv')
 
@@ -22,9 +22,18 @@ if(op2 == '1'):
 match op:
     case '0':
         coluna = colunas[0]
-        arr = data[coluna].tolist()  
+        arr = data[coluna].tolist() 
+        arr2 = arr 
+        inicial_quick_sort = time.time()
         quickSort(arr, 0, len(arr) - 1, pivotMiddle)
-        print("Array ordenado:", arr[:15])
+        final_quick_sort = time.time()
+        print(f"Duração do Quick Sort foi: {final_quick_sort-inicial_quick_sort:.2}")
+        print("Array ordenado pelo QuickSort:", arr[:15])
+        inicial_shell_sort = time.time()
+        shellSort(arr2)
+        final_shell_sort = time.time()
+        print(f"Duração do Shell Sort foi: {final_shell_sort-inicial_shell_sort:.2}")
+        print("Array ordenado pelo ShellSort:", arr2[:15])
     case '1':
         coluna = colunas[1]
         arr = data[coluna].tolist()  

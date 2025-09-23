@@ -31,3 +31,19 @@ def quickSort(array, low, high, isMiddle):
         pi = partition(array, low, high, isMiddle)
         quickSort(array, low, pi, isMiddle)       # esquerda (até o corte)
         quickSort(array, pi + 1, high, isMiddle)  # direita (depois do corte)
+
+def shellSort(arr):
+        n = len(arr)
+
+        gap = n // 2
+        while gap > 0:
+            for i in range(gap, n):
+                temp = arr[i]
+                j = i
+                while j >= gap and arr[j - gap] > temp:
+                    arr[j] = arr[j - gap]
+                    j -= gap
+                arr[j] = temp
+
+            gap //= 2
+        return 0
